@@ -4,3 +4,6 @@
 [submodule "icon-sources/tabler-icons"]
 	path = icon-sources/tabler-icons
 	url = git@github.com:tabler/tabler-icons.git
+[submodule "icon-sources/open-iconic"]
+	path = icon-sources/open-iconic
+	url = git@github.com:iconic/open-iconic.git

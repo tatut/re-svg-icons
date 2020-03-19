@@ -1,7 +1,8 @@
 (ns re-svg-icons.demo
   (:require [reagent.core :as r]
             [re-svg-icons.feather-icons :as fi]
-            [re-svg-icons.tabler-icons :as ti]))
+            [re-svg-icons.tabler-icons :as ti]
+            [re-svg-icons.open-iconic :as oi]))
 
 (def some-feather-icons [["wind" fi/wind]
                          ["bar-chart-2" fi/bar-chart-2]
@@ -13,6 +14,10 @@
                         ["ticket" ti/ticket]
                         ["puzzle" ti/puzzle]])
 
+(def some-open-iconic-icons [["lock-locked" oi/lock-locked]
+                             ["calculator" oi/calculator]
+                             ["browser" oi/browser]
+                             ["thumb-up" oi/thumb-up]])
 (defn icons [icons opts]
   [:<>
    [:div {:style {:display :flex :flex-direction :row
@@ -35,7 +40,7 @@
    ;; icons with specified properties
    [:div
     "Icons with options map (width&height)"
-    [icons demo-icons {:width 66 :height 66}]]
+    [icons demo-icons {:width 42 :height 42}]]
 
    ;; Icons with a class
    [:div
@@ -45,7 +50,8 @@
 (defn demo-component []
   [:<>
    [icon-demo "FEATHER ICONS" some-feather-icons]
-   [icon-demo "TABLER ICONS" some-tabler-icons]])
+   [icon-demo "TABLER ICONS" some-tabler-icons]
+   [icon-demo "OPEN ICONIC" some-open-iconic-icons]])
 
 (defn ^:export main []
   ;; remove figwheel generated app element (we don't want to provide index.html)
