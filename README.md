@@ -6,4 +6,18 @@ Contains MIT licensed icons ready to use in ClojureScript as simple SVG function
 component. Icons can also be modified by passing an optional map of options for
 the toplevel svg element (like dimensions or class).
 
-*Usage* See demo/re_svg_icons/demo.cljs for usage.
+# Demo and usage
+
+## Basic usage
+
+All icons are just functions that return SVG in hiccup format so
+they can be used as a reagent component directly.
+
+```clojure
+[:div "download icon: " [feather-icons/download]]
+```
+
+All icons take optional options map.
+See demo/re_svg_icons/demo.cljs for sample:
+
+![](demo/demo.png?raw=true)
