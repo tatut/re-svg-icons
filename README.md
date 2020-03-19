@@ -6,6 +6,13 @@ Contains MIT licensed icons ready to use in ClojureScript as simple SVG function
 component. Icons can also be modified by passing an optional map of options for
 the toplevel svg element (like dimensions or class).
 
+# Icon sources
+
+The following MIT licensed icon sets are included in the library:
+
+* [Feather icons](https://github.com/feathericons/feather)
+* [Tabler Icons](https://github.com/tabler/tabler-icons)
+
 # Demo and usage
 
 ## Basic usage
