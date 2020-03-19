@@ -1,6 +1,6 @@
 {:deps {org.clojure/clojurescript {:mvn/version "1.10.520"}}
  :aliases {:generate {:extra-paths ["generate"]
-                      :extra-deps {}}
+                      :extra-deps {hiccup {:mvn/version "1.0.5"}}}
            :demo {:extra-paths ["demo"]
                   :extra-deps {reagent {:mvn/version "0.9.0"}
                                com.bhauman/figwheel-main {:mvn/version "0.2.3"}}

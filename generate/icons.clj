@@ -2,7 +2,8 @@
   "Generate icons"
   (:require [clojure.xml :as xml]
             [clojure.java.io :as io]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [hiccup.core :refer [html]]))
 
 
 (defn svg->hiccup
@@ -35,15 +36,19 @@
    {:name (first (str/split (.getName file) #"\."))
     :hiccup (->> file xml/parse (svg->hiccup svg-xf))}))
 
+(def all-icons (atom []))
+
 (defn convert-icons [icon-paths source-file ns-name svg-xf]
   (spit (io/file source-file)
         (str "(ns " ns-name "\n  (:require [re-svg-icons.core :refer [icon*]]))\n\n"
              (str/join "\n\n"
                        (for [file (mapcat #(.listFiles (io/file %)) icon-paths)
-                             :let [{:keys [name hiccup]} (icon-file->hiccup svg-xf file)]]
-                         (str "(defn " name
-                              " ([] (" name " {}))"
-                              " ([opts] (icon* opts " (pr-str hiccup) ")))"))))))
+                             :let [{:keys [name hiccup] :as icon} (icon-file->hiccup svg-xf file)]]
+                         (do
+                           (swap! all-icons conj (assoc icon :ns ns-name))
+                           (str "(defn " name
+                                " ([] (" name " {}))"
+                                " ([opts] (icon* opts " (pr-str hiccup) ")))")))))))
 (defn feather-icons []
   (convert-icons ["icon-sources/feather/icons"]
                  "src/re_svg_icons/feather_icons.cljs"
@@ -82,8 +87,27 @@
                  "re-svg-icons.heroicons"
                  identity))
 
+(defn all-icons-page []
+  (html
+   [:html
+    [:body
+     (for [[ns icons] (group-by :ns @all-icons)]
+       [:div
+        [:h3 "Namespace: " ns]
+        [:table
+         [:tbody
+          (for [icons (partition-all 8 icons)]
+            [:tr
+             (map (fn [{:keys [name hiccup]}]
+                    [:td
+                     [:div hiccup]
+                     [:div {:style "height: 30px;"} name]])
+                     icons)])]]])]]))
+
 (defn -main [& _args]
   (feather-icons)
   (tabler-icons)
   (open-iconic-icons)
-  (heroicons))
+  (heroicons)
+  (spit "demo/all-icons.html"
+        (all-icons-page)))
