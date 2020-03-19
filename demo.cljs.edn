@@ -1,0 +1,3 @@
+^{:watch-dirs ["src" "demo"]}
+{:main re-svg-icons.demo
+ :open-url false}
