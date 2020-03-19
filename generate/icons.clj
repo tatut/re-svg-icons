@@ -35,29 +35,29 @@
    {:name (first (str/split (.getName file) #"\."))
     :hiccup (->> file xml/parse (svg->hiccup svg-xf))}))
 
-(defn convert-icons [icon-path source-file ns-name svg-xf]
+(defn convert-icons [icon-paths source-file ns-name svg-xf]
   (spit (io/file source-file)
         (str "(ns " ns-name "\n  (:require [re-svg-icons.core :refer [icon*]]))\n\n"
              (str/join "\n\n"
-                       (for [file (.listFiles (io/file icon-path))
+                       (for [file (mapcat #(.listFiles (io/file %)) icon-paths)
                              :let [{:keys [name hiccup]} (icon-file->hiccup svg-xf file)]]
                          (str "(defn " name
                               " ([] (" name " {}))"
                               " ([opts] (icon* opts " (pr-str hiccup) ")))"))))))
 (defn feather-icons []
-  (convert-icons "icon-sources/feather/icons"
+  (convert-icons ["icon-sources/feather/icons"]
                  "src/re_svg_icons/feather_icons.cljs"
                  "re-svg-icons.feather-icons"
                  identity))
 
 (defn tabler-icons []
-  (convert-icons "icon-sources/tabler-icons/icons"
+  (convert-icons ["icon-sources/tabler-icons/icons"]
                  "src/re_svg_icons/tabler_icons.cljs"
                  "re-svg-icons.tabler-icons"
                  identity))
 
 (defn open-iconic-icons []
-  (convert-icons "icon-sources/open-iconic/svg"
+  (convert-icons ["icon-sources/open-iconic/svg"]
                  "src/re_svg_icons/open_iconic.cljs"
                  "re-svg-icons.open-iconic"
 
@@ -75,8 +75,15 @@
                                :attrs {:transform "scale(3)"}
                                :content content}]})))
 
+(defn heroicons []
+  (convert-icons ["icon-sources/heroicons/src/solid-sm"
+                  "icon-sources/heroicons/src/outline-md"]
+                 "src/re_svg_icons/heroicons.cljs"
+                 "re-svg-icons.heroicons"
+                 identity))
 
 (defn -main [& _args]
   (feather-icons)
   (tabler-icons)
-  (open-iconic-icons))
+  (open-iconic-icons)
+  (heroicons))

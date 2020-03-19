@@ -7,3 +7,6 @@
 [submodule "icon-sources/open-iconic"]
 	path = icon-sources/open-iconic
 	url = git@github.com:iconic/open-iconic.git
+[submodule "icon-sources/heroicons"]
+	path = icon-sources/heroicons
+	url = git@github.com:refactoringui/heroicons.git

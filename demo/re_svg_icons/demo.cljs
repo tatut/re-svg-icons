@@ -2,7 +2,8 @@
   (:require [reagent.core :as r]
             [re-svg-icons.feather-icons :as fi]
             [re-svg-icons.tabler-icons :as ti]
-            [re-svg-icons.open-iconic :as oi]))
+            [re-svg-icons.open-iconic :as oi]
+            [re-svg-icons.heroicons :as hi]))
 
 (def some-feather-icons [["wind" fi/wind]
                          ["bar-chart-2" fi/bar-chart-2]
@@ -18,6 +19,12 @@
                              ["calculator" oi/calculator]
                              ["browser" oi/browser]
                              ["thumb-up" oi/thumb-up]])
+
+(def some-heroicons [["md-phone-incoming" hi/md-phone-incoming]
+                     ["md-inbox-in" hi/md-phone-incoming]
+                     ["sm-cloud-download" hi/sm-cloud-download]
+                     ["sm-sparkles" hi/sm-sparkles]])
+
 (defn icons [icons opts]
   [:<>
    [:div {:style {:display :flex :flex-direction :row
@@ -51,7 +58,8 @@
   [:<>
    [icon-demo "FEATHER ICONS" some-feather-icons]
    [icon-demo "TABLER ICONS" some-tabler-icons]
-   [icon-demo "OPEN ICONIC" some-open-iconic-icons]])
+   [icon-demo "OPEN ICONIC" some-open-iconic-icons]
+   [icon-demo "HEROICONS" some-heroicons]])
 
 (defn ^:export main []
   ;; remove figwheel generated app element (we don't want to provide index.html)
