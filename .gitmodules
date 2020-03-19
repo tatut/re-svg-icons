@@ -1,0 +1,3 @@
+[submodule "icon-sources/feather"]
+	path = icon-sources/feather
+	url = git@github.com:feathericons/feather.git
