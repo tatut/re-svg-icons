@@ -1,3 +1,6 @@
 [submodule "icon-sources/feather"]
 	path = icon-sources/feather
 	url = git@github.com:feathericons/feather.git
+[submodule "icon-sources/tabler-icons"]
+	path = icon-sources/tabler-icons
+	url = git@github.com:tabler/tabler-icons.git
