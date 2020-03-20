@@ -91,7 +91,8 @@
   (html
    [:html
     [:body
-     (for [[ns icons] (group-by :ns @all-icons)]
+     (for [[ns icons] (group-by :ns @all-icons)
+           :let [icons (sort-by :name icons)]]
        [:div
         [:h3 "Namespace: " ns]
         [:table
@@ -109,5 +110,5 @@
   (tabler-icons)
   (open-iconic-icons)
   (heroicons)
-  (spit "demo/all-icons.html"
+  (spit "docs/all-icons.html"
         (all-icons-page)))
