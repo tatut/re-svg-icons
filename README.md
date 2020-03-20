@@ -13,6 +13,7 @@ The following MIT licensed icon sets are included in the library:
 * [Feather icons](https://github.com/feathericons/feather)
 * [Tabler Icons](https://github.com/tabler/tabler-icons)
 * [Open Iconic](https://github.com/iconic/open-iconic)
+* [Heroicons](https://github.com/refactoringui/heroicons)
 
 See [all icons here](https://tatut.github.io/re-svg-icons/all-icons.html).
 
