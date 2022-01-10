@@ -42,8 +42,9 @@
   (spit (io/file source-file)
         (str "(ns " ns-name "\n  (:require [re-svg-icons.core :refer [icon*]]))\n\n"
              (str/join "\n\n"
-                       (for [file (mapcat #(.listFiles (io/file %)) icon-paths)
-                             :let [{:keys [name hiccup] :as icon} (icon-file->hiccup svg-xf file)]]
+                       (for [file (sort-by #(.getName (io/as-file %)) (mapcat #(.listFiles (io/file %)) icon-paths))
+                             :let [{:keys [name hiccup] :as icon} (icon-file->hiccup svg-xf file)
+                                   name (if (re-matches #"[0-9].*" name) (str "i" name) name)]]
                          (do
                            (swap! all-icons conj (assoc icon :ns ns-name))
                            (str "(defn " name
@@ -87,6 +88,12 @@
                  "re-svg-icons.heroicons"
                  identity))
 
+(defn iconoir-icons []
+  (convert-icons ["icon-sources/iconoir/icons"]
+                 "src/re_svg_icons/iconoir.cljs"
+                 "re-svg-icons.iconoir"
+                 identity))
+
 (defn all-icons-page []
   (html
    [:html
@@ -110,5 +117,6 @@
   (tabler-icons)
   (open-iconic-icons)
   (heroicons)
+  (iconoir-icons)
   (spit "docs/all-icons.html"
         (all-icons-page)))
