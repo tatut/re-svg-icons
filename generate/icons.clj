@@ -88,6 +88,12 @@
                  "re-svg-icons.heroicons"
                  identity))
 
+(defn iconoir-icons []
+  (convert-icons ["icon-sources/iconoir/icons"]
+                 "src/re_svg_icons/iconoir.cljs"
+                 "re-svg-icons.iconoir"
+                 identity))
+
 (defn all-icons-page []
   (html
    [:html
@@ -111,5 +117,6 @@
   (tabler-icons)
   (open-iconic-icons)
   (heroicons)
+  (iconoir-icons)
   (spit "docs/all-icons.html"
         (all-icons-page)))

@@ -14,6 +14,7 @@ The following MIT licensed icon sets are included in the library:
 * [Tabler Icons](https://github.com/tabler/tabler-icons)
 * [Open Iconic](https://github.com/iconic/open-iconic)
 * [Heroicons](https://github.com/refactoringui/heroicons)
+* [Iconoir](https://github.com/lucaburgio/iconoir)
 
 See [all icons here](https://tatut.github.io/re-svg-icons/all-icons.html).
 
